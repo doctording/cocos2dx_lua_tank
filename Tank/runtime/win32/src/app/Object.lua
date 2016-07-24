@@ -73,4 +73,10 @@ function Object:GetRect()
 	return NewRect(self.sp:getPositionX(), self.sp:getPositionY())
 end
 
+--子弹要停下来
+function Object:Stop()
+	self.dx = 0
+	self.dy = 0
+end
+
 return Object

@@ -24,6 +24,8 @@ function Map:ctor(node)
 	self:Set(5,8,"steel")
 	self:Set(4,7,"grass")
 	self:Set(8,8,"water")
+	self:Set(3,2,"brick")
+	self:Set(6,6,"brick")
 	
 end
 
@@ -73,6 +75,7 @@ function Map:collideWithBlock(r,x,y)
 	return nil
 end
 
+-- Åö×²¼ì²â
 function Map:Collide(posx, posy, ex)
 	local object = NewRect(posx,posy,ex)
 
@@ -90,6 +93,23 @@ function Map:Collide(posx, posy, ex)
 	
 	return nil
 	
+end
+
+-- ×Óµ¯£¨µã£© ºÍ ¾ØÐÎÅö×²
+function Map:Hit(posx, posy)
+	
+	local x, y = Pos2Grid(posx, posy)
+	local block = self:Get(x, y)
+	
+	if block == nil then
+		return nil,true
+	end
+	
+	if block.breakable then
+		return block
+	end
+	
+	return nil
 end
 
 return Map

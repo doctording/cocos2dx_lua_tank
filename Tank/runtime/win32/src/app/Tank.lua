@@ -1,6 +1,8 @@
 local Object = require("app.Object")
 local SpriteAnim = require("app.SpriteAnim")
 
+local Bullet = require("app.Bullet")
+
 local Tank = class("Tank",Object)
 
 function Tank:ctor(node,name,map)
@@ -91,5 +93,16 @@ function Tank:Destroy()
 	Tank.super.Destroy(self)
 	
 end
+
+function Tank:Fire()
+	
+	if self.bullet ~= nil and self.bullet:Alive() then
+		return
+	end
+	
+	self.bullet = Bullet.new(self.node, self.map, 0 , self, self.dir)
+	
+end
+
 
 return Tank

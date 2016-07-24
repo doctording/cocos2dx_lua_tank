@@ -104,10 +104,10 @@ function SpriteAnim:Play(name,callback)
 					
 						setFrame(self.sp, def, def.currFrame)
 						
-					elseif def.once then
+					elseif def.once then -- 动画只运行一次
 					
-							def.running = false
-							 cc.Director:getInstance():getScheduler():unscheduleScriptFunc(def.shid)
+							 def.running = false
+							 cc.Director:getInstance():getScheduler():unscheduleScriptEntry(def.shid)
 							 def.shid = nil
 							 
 							 if callback ~= nil then

@@ -41,25 +41,26 @@ function MainScene:ProcessKeyInput()
     local function keyboardPressed(keyCode,event)
 
         -- up
-        if keyCode == 28 then -- 146
+        if keyCode == 28 or keyCode == 146 then 
                 print("up")
                 --self.tank:SetDir("up")
                 self.tank:MoveBegin("up")
         -- down
-        elseif keyCode == 29 then -- 142
+        elseif keyCode == 29 or keyCode == 142 then
                 print("down")
                 -- self.tank:SetDir("down")
                 self.tank:MoveBegin("down")
         --left
-        elseif keyCode == 26 then -- 124
+        elseif keyCode == 26 or keyCode == 124 then
                 print("left")
                 -- self.tank:SetDir("left")
                 self.tank:MoveBegin("left")
         --right
-        elseif keyCode == 27 then -- 127
+        elseif keyCode == 27 or keyCode == 127 then
                 print("right")
                 -- self.tank:SetDir("right")
                 self.tank:MoveBegin("right")
+                           
         end
 
     end
@@ -67,25 +68,30 @@ function MainScene:ProcessKeyInput()
 	local function keyboardReleased(keyCode,event)
 
         -- up
-        if keyCode == 28 then -- 146
+        if keyCode == 28 or keyCode == 146 then  -- 146
                 print("up")
                 --self.tank:SetDir("up")
                 self.tank:MoveEnd("up")
         -- down
-        elseif keyCode == 29 then -- 142
+        elseif keyCode == 29 or keyCode == 142 then -- 142
                 print("down")
                 -- self.tank:SetDir("down")
                 self.tank:MoveEnd("down")
         --left
-        elseif keyCode == 26 then -- 124
+        elseif keyCode == 26 or keyCode == 124 then -- 124
                 print("left")
                 -- self.tank:SetDir("left")
                 self.tank:MoveEnd("left")
         --right
-        elseif keyCode == 27 then -- 127
+        elseif keyCode == 27 or keyCode == 127 then -- 127
                 print("right")
                 -- self.tank:SetDir("right")
                 self.tank:MoveEnd("right")
+        
+        -- ·¢Éä×Óµ¯ 
+        elseif keyCode == 133 then -- J
+                self.tank:Fire()
+                
         end
 
     end
