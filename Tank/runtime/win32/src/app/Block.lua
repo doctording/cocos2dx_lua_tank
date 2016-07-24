@@ -103,7 +103,7 @@ function Block:updateImage()
 		
 		if self.type == "grass" then
 			self.sp:setLocalZOrder(10) -- 草在坦克的上面
-			setl.sp:setOpacity(200) -- 透明度
+			self.sp:setOpacity(200) -- 透明度
 		else
 			self.sp:setLocalZOrder(0)
 			self.sp:setOpacity(255)

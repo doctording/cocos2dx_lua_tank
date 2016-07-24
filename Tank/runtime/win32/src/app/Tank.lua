@@ -3,10 +3,11 @@ local SpriteAnim = require("app.SpriteAnim")
 
 local Tank = class("Tank",Object)
 
-function Tank:ctor(node,name)
+function Tank:ctor(node,name,map)
 	
 	Tank.super.ctor(self,node) --调用父类的构造函数
 	self.node = node
+	self.map = map
 	
 	-- x y 方向上的移动
 	self.dx = 0
@@ -32,8 +33,13 @@ function Tank:ctor(node,name)
 	
 end
 
+-- 更新 检测碰撞
 function Tank:Update()
 	self:UpdatePosition(function(nextPosX,nextPosY)
+		
+			local hit
+			hit = self.map:Collide(nextPosX,nextPosY,-5)			
+			return hit
 		
 	end)
 end

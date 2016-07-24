@@ -68,4 +68,9 @@ function Object:SetPos(x,y)
 	self.sp:setPosition(posx, posy)
 end
 
+
+function Object:GetRect()
+	return NewRect(self.sp:getPositionX(), self.sp:getPositionY())
+end
+
 return Object
