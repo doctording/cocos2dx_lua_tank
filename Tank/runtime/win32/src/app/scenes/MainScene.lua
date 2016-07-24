@@ -1,3 +1,5 @@
+require "app.Common"
+local Map =  require("app.Map")
 local Tank = require("app.Tank")
 local PlayerTank = require("app.PlayerTank")
 
@@ -17,6 +19,10 @@ end
 function MainScene:onEnter()
 		local spriteFrameCache = cc.SpriteFrameCache:getInstance()
 		spriteFrameCache:addSpriteFrames("res/tanks/tex.plist")
+		
+		
+		--µØÍ¼
+		self.map = Map.new(self)
 		
 		--self.tank = Tank.new(self, "tank_green")
 		self.tank = PlayerTank.new(self, "tank_green")

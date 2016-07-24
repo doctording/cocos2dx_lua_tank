@@ -1,3 +1,5 @@
+require "app.Common"
+
 local Object = class("Object")
 
 function Object:ctor(node)
@@ -53,6 +55,17 @@ function Object:Destroy()
 	self.node:removeChild(self.sp)
 	self.sp = nil
 	
+end
+
+-- 取得位置
+function Object:GetPos()
+	return Pos2Grid(self.sp:getPositionX(), self.sp:getPositionY())
+end
+
+-- 设置位置
+function Object:SetPos(x,y)
+	local posx,posy = Grid2Pos(x,y)
+	self.sp:setPosition(posx, posy)
 end
 
 return Object

@@ -8,7 +8,7 @@ function SpriteAnim:ctor(sp)
 
 end
 
--- 设置精灵的征
+-- 设置精灵的一个帧
 local function setFrame(sp,def,index)
 		if sp == nil then
 			return
@@ -18,11 +18,11 @@ local function setFrame(sp,def,index)
 		
 		local final
 		
-		if def.name ~= nil then --动画征
+		if def.name ~= nil then --动画帧
 		
 			final = string.format("%s_%s%d.png", def.spname, def.name, index)
 		
-		else -- 不带动画征
+		else -- 不带动画帧
 		
 			final = string.format("%s%d.png", def.spname, index)
 			
@@ -69,7 +69,7 @@ function SpriteAnim:Define(name,spname,frameCount,interval,once)
 	if name == nil then
 		self.anim[spname] = def
 	else
-		--带动作
+		--带动作 带动画帧
 		self.anim[name] = def
 	end
 	
