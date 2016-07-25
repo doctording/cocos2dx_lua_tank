@@ -5,9 +5,9 @@ local Bullet = require("app.Bullet")
 
 local Tank = class("Tank",Object)
 
-function Tank:ctor(node,name,map)
+function Tank:ctor(node,name,map,camp)
 	
-	Tank.super.ctor(self,node) --调用父类的构造函数
+	Tank.super.ctor(self,node,camp) --调用父类的构造函数
 	self.node = node
 	self.map = map
 	
@@ -40,7 +40,13 @@ function Tank:Update()
 	self:UpdatePosition(function(nextPosX,nextPosY)
 		
 			local hit
-			hit = self.map:Collide(nextPosX,nextPosY,-5)			
+			hit = self.map:Collide(nextPosX,nextPosY,-5)
+			
+			-- 活体碰撞
+			if hit == nil then
+				hit = self:CheckCollide(nextPosX,nextPosY)
+			end
+			
 			return hit
 		
 	end)
@@ -89,7 +95,7 @@ end
 
 function Tank:Destroy()
 	
-	sel.spAnim:Destroy()
+	self.spAnim:Destroy()
 	Tank.super.Destroy(self)
 	
 end

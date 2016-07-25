@@ -3,9 +3,9 @@ local socket = require("socket")
 
 local PlayerTank = class("PlayerTank", Tank)
 
-function PlayerTank:ctor(node,name,map)
+function PlayerTank:ctor(node,name,map,camp)
 	
-	PlayerTank.super.ctor(self, node, name, map) --调用父类的构造函数
+	PlayerTank.super.ctor(self, node, name, map,camp) --调用父类的构造函数
 	self.dirTable = {}
 	
 end

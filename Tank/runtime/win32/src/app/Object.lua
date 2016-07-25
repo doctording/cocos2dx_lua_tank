@@ -1,8 +1,11 @@
 require "app.Common"
+require "app.Camp"
 
 local Object = class("Object")
 
-function Object:ctor(node)
+function Object:ctor(node,camp)
+	
+	Camp_Add(camp,self)
 	
 	self.sp = cc.Sprite:create()
 	self.node = node
@@ -48,6 +51,8 @@ end
 
 function Object:Destroy()
 	
+	Camp_Remove(self)
+	
 	if self.updateFuncID then
 		cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self.updateFuncID)
 	end
@@ -77,6 +82,40 @@ end
 function Object:Stop()
 	self.dx = 0
 	self.dy = 0
+end
+
+-- 活体碰撞
+function Object:CheckCollide(posx, posy, ex)
+	local selfrect = NewRect(posx,posy,ex)
+	
+	return Camp_IterateAll(function(obj)
+			
+			-- 排除自己
+			if obj == self then
+				return false
+			end
+			
+			local tgtrect = obj:GetRect()
+			
+			if RectIntersect(selfrect, tgtrect) ~= nil then
+				return obj
+			end
+			
+	end)
+end
+
+-- 子弹碰撞
+function Object:CheckHit(posx, posy)
+	
+	return Camp_IterateHostile(self.camp,function(obj)
+			
+			local tgtrect = obj:GetRect()
+			
+			if RectHit(tgtrect, posx, posy) then
+				return obj
+			end
+	end)
+	
 end
 
 return Object

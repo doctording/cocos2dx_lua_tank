@@ -1,4 +1,5 @@
 require "app.Common"
+require "app.Camp"
 local Map =  require("app.Map")
 local Tank = require("app.Tank")
 local PlayerTank = require("app.PlayerTank")
@@ -20,16 +21,27 @@ function MainScene:onEnter()
 		local spriteFrameCache = cc.SpriteFrameCache:getInstance()
 		spriteFrameCache:addSpriteFrames("res/tanks/tex.plist")
 		
+		Camp_SetHostile("player","enemy", true)
+		Camp_SetHostile("enemy","player", true)
+		
+		Camp_SetHostile("player.bullet","enemy", true)
+		Camp_SetHostile("enemy.bullet","player", true)
+		
+		-- 子弹可以对消
+		Camp_SetHostile("player.bullet","enemy.bullet", true)
+		Camp_SetHostile("enemy.bullet","player.bullet", true)
 		
 		--地图
 		self.map = Map.new(self)
 		
 		--self.tank = Tank.new(self, "tank_green", self.map)
-		self.tank = PlayerTank.new(self, "tank_green", self.map)
+		self.tank = PlayerTank.new(self, "tank_green", self.map,"player")
 		
 		self.tank:SetPos(3,3)
 		--local size = cc.Director:getInstance():getWinSize()
 		--self.tank.sp:setPosition(size.width/2,size.height/2)
+		
+		Tank.new(self, "tank_blue", self.map,"enemy"):SetPos(4,4)
 		
 		self:ProcessKeyInput()
 end
