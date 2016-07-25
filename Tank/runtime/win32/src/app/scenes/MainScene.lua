@@ -1,5 +1,6 @@
 require "app.Common"
 require "app.Camp"
+local Factory =  require("app.Factory")
 local Map =  require("app.Map")
 local Tank = require("app.Tank")
 local PlayerTank = require("app.PlayerTank")
@@ -34,6 +35,8 @@ function MainScene:onEnter()
 		--地图
 		self.map = Map.new(self)
 		
+		self.factory = Factory.new(self,self.map)
+		
 		--self.tank = Tank.new(self, "tank_green", self.map)
 		self.tank = PlayerTank.new(self, "tank_green", self.map,"player")
 		
@@ -41,7 +44,9 @@ function MainScene:onEnter()
 		--local size = cc.Director:getInstance():getWinSize()
 		--self.tank.sp:setPosition(size.width/2,size.height/2)
 		
-		Tank.new(self, "tank_blue", self.map,"enemy"):SetPos(4,4)
+		-- 敌方坦克
+		--Tank.new(self, "tank_blue", self.map,"enemy"):SetPos(4,4)
+		
 		
 		self:ProcessKeyInput()
 end
@@ -103,6 +108,10 @@ function MainScene:ProcessKeyInput()
         -- 发射子弹 
         elseif keyCode == 133 then -- J
                 self.tank:Fire()
+        
+        -- k
+        elseif keyCode == 134 then
+                self.factory:SpawnRandom()
                 
         end
 

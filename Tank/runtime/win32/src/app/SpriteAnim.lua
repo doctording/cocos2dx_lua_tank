@@ -136,9 +136,10 @@ function SpriteAnim:Stop()
 end
 
 function SpriteAnim:Destroy()
+
 	for name, def in pairs(self.anim) do
 		if def.shid then
-			cc.Director:getInstance():getScheduler():unscheduleScriptFunc(def.shid)
+			cc.Director:getInstance():getScheduler():unscheduleScriptEntry(def.shid)
 		end
 	end
 	
