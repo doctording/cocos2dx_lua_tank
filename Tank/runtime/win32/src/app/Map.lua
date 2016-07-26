@@ -21,12 +21,15 @@ function Map:ctor(node)
 		end
 	end
 	
+--[[	
 	self:Set(5,8,"steel")
 	self:Set(4,7,"grass")
 	self:Set(8,8,"water")
 	self:Set(3,2,"brick")
 	self:Set(6,6,"brick")
-	
+	]]
+	local editorFileName = "editor.lua"
+	self:Load(editorFileName)
 end
 
 
@@ -39,6 +42,7 @@ function Map:Get(x,y)
 	
 end
 
+-- 往map中set一个block
 function Map:Set(x, y, type)
 	local block = self.map[x * MapHeight + y]
 	if block == nil then
@@ -111,5 +115,43 @@ function Map:Hit(posx, posy)
 	
 	return nil
 end
+
+
+--地图存储
+function Map:Save(filename)
+	
+	local f = assert(io.open(filename,"w"))	
+	
+	f:write("return {\n")
+  
+  for x = 0 , MapWidth - 1 do
+  	for y = 0, MapHeight -1 do
+  		local block = self:Get(x,y)
+  		f:write(string.format("{x =%d,y=%d,type='%s'},\n",x,y,block.type))
+  	end
+  end
+  
+  f:write("}\n")
+
+  f:close()
+
+  print(filename .. "saved")
+    
+end
+
+--读取
+function Map:Load(filename)
+	local t = dofile(filename)
+	if t == nil then
+		return
+	end
+	
+	for _, block in ipairs(t) do
+		self:Set(block.x, block.y, block.type)
+	end	
+	
+	print(filename .. "loaded")
+end
+
 
 return Map

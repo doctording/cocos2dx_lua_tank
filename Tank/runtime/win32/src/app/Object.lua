@@ -14,7 +14,9 @@ function Object:ctor(node,camp)
 	-- ¸üÐÂº¯Êý
 	if self.Update ~= nil then
 		self.updateFuncID = cc.Director:getInstance():getScheduler():scheduleScriptFunc(
-			function() self:Update() end, 0 ,false)
+			function() 
+				self:Update() 
+			end, 0, false)
 	end
 	
 end

@@ -72,7 +72,7 @@ function Bullet:Update()
 						-- 判断对象类型
 						if iskindof(target, "Bullet") then
 							hit = "disappear"
-							target.spAnim:Destory()
+							target.spAnim:Destroy()
 						else
 							hit = "explode"
 						end
@@ -86,8 +86,8 @@ function Bullet:Update()
 					if hit == "explode" then
 						self:Explode()
 					elseif hit == "disappear" then
-						self.spAnim:Destory()
-						self:Destory()
+						self.spAnim:Destroy()
+						self:Destroy()
 					end
 					
 				end
